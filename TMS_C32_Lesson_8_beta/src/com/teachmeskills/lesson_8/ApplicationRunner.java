@@ -1,35 +1,27 @@
 package com.teachmeskills.lesson_8;
 
-import com.teachmeskills.lesson_8.document_parser.IParser;
-import com.teachmeskills.lesson_8.fabric.ParserFabric;
 import com.teachmeskills.lesson_8.model.card.MasterCard;
 import com.teachmeskills.lesson_8.model.card.VisaCard;
-import com.teachmeskills.lesson_8.transfer.impl.MasterCardTransferService;
-import com.teachmeskills.lesson_8.transfer.impl.VisaCardTransferService;
+import com.teachmeskills.lesson_8.model.client.IndividualClient;
 
 import java.util.Date;
-import java.util.Scanner;
 
 public class ApplicationRunner {
 
     public static void main(String[] args) {
-        System.out.println("Input path to file");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        IndividualClient client1 = new IndividualClient("Vlad Fomin", "1234 123456");
+        IndividualClient client2 = new IndividualClient("Nikita Krutoy", "9876 987654");
 
-        IParser parser = ParserFabric.createParser(input);
-        parser.parseFile(input);
+        MasterCard masterCard1 = new MasterCard("1234 123456", 123, new Date(), client1, "USD", "Russia");
+        MasterCard masterCard2 = new MasterCard("1234 12345", 123, new Date(), client1, "USD", "Russia");
+        MasterCard masterCard3 = new MasterCard("1234 123456", 123, new Date(), client1, "USD", "Russia");
+        MasterCard masterCard4 = new MasterCard("3456 123456", 321, new Date(), client1, "USD", "Russia");
 
-        MasterCard masterCardAccount1 = new MasterCard("123123", 234, new Date(), "Vlad Fomin", "RUB", "RUS");
-        VisaCard visaCardAccount1 = new VisaCard("321321", 123, new Date(), "Vlad Fomin", "RUB", 5);
+        VisaCard visaCard1 = new VisaCard("1234 123456", 123, new Date(), client2, "USD", 2);
+        VisaCard visaCard2 = new VisaCard("3456 123456", 321, new Date(), client2, "USD", 2);
 
-        MasterCard masterCardAccount2 = new MasterCard("456456", 645, new Date(), "Nikita Krutoy", "BYN", "BLR");
-        VisaCard visaCardAccount2 = new VisaCard("654654", 446, new Date(), "Nikita Krutoy", "BYN", 1);
-
-        MasterCardTransferService transfer1 = new MasterCardTransferService();
-        transfer1.transferFromCardToCard(masterCardAccount1, visaCardAccount2, 500);
-        VisaCardTransferService transfer2 = new VisaCardTransferService();
-        transfer2.transferFromCardToAccount(masterCardAccount2, visaCardAccount1, 23532);
+        client1.showCardInfo();
+        client2.showCardInfo();
 
     }
 
